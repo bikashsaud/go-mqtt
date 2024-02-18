@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT Subscriber</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body>
+
+    <h1>MQTT Subscriber</h1>
+    <h3> Received Message</h3>
+    <h2 id="messagesText"></h2>
+
+    <script>
+
+        client.onMessageArrived = onMessageArrived;
+
+        function onMessageArrived(message) {
+            console.log("Received message on topic " + message.destinationName + ": " + message.payloadString);
+            var messageElement = document.getElementById("messagesText");
+            messageElement.textContent = message.payloadString;
+
+            if (message.payloadString === "hello") {
+                console.log("Received handshake message: hello");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
